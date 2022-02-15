@@ -1,4 +1,4 @@
-package ir.bbd.githubrepo
+package com.bbd.github_repo
 
 import java.io.InputStreamReader
 
