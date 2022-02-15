@@ -1,4 +1,4 @@
-package ir.bbd.githubrepo.data.source.remote.api_model
+package com.bbd.github_repo.data.source.remote.api_model
 import com.google.gson.annotations.SerializedName
 
 
