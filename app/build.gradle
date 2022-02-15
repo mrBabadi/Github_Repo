@@ -24,6 +24,8 @@ android {
         testInstrumentationRunner "com.bbd.github_repo.CustomRunner"
     }
 
+    buildFeatures { viewBinding true }
+
     buildTypes {
         release {
             minifyEnabled false
