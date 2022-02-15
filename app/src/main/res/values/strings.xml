@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Github_Repo</string>
+
+
+    <string name="error_403">Too many requests, try a few minutes later</string>
+    <string name="error_404">User Not Found</string>
+    <string name="error_not_defined">Error not defined</string>
+    <string name="permission_denied">Permission Denied</string>
+    <string name="unresolve_host">Unable to resolve host</string>
+    <string name="something_bad_happened">Something bad occurred, try later</string>
 </resources>
