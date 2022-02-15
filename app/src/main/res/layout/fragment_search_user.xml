@@ -1,6 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="22dp"
+    android:animateLayoutChanges="true"
+    android:background="@color/github_primary">
+
+    <RelativeLayout
+        android:id="@+id/searchInputRel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        android:animateLayoutChanges="true">
+
+        <ImageView
+            android:id="@+id/searchInputIv"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:padding="4dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_baseline_keyboard_voice_24" />
+
+        <EditText
+            android:id="@+id/searchInputEt"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_toStartOf="@id/searchInputIv"
+            android:background="@null"
+            android:hint="@string/search_input_hint"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:textColor="@color/github_secondary"
+            android:textColorHint="@color/input_hint_color" />
+
+    </RelativeLayout>
+
+
+    <ProgressBar
+        android:id="@+id/searchLoading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchInputRel"
+        app:layout_constraintVertical_bias="0.0"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        style="?android:attr/progressBarStyleHorizontal" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/usersRv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:visibility="visible"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:itemCount="10"
+        tools:listitem="@layout/item_user"
+        app:layout_constraintTop_toBottomOf="@+id/searchLoading" />
+
+
+    <TextView
+        android:id="@+id/notUsersFoundTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/input_hint_color"
+        app:layout_constraintBottom_toBottomOf="@+id/usersRv"
+        app:layout_constraintEnd_toEndOf="@+id/usersRv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/searchInputRel"
+        android:text="@string/no_users_found"
+        android:visibility="invisible"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
