@@ -39,10 +39,22 @@
             android:layout_toStartOf="@id/searchInputIv"
             android:background="@null"
             android:hint="@string/search_input_hint"
-            android:singleLine="true"
             android:maxLines="1"
+            android:singleLine="true"
             android:textColor="@color/github_secondary"
             android:textColorHint="@color/input_hint_color" />
+
+
+        <TextView
+            android:id="@+id/lastSearchTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/searchInputEt"
+            android:textColor="@color/input_hint_color"
+            android:textSize="12dp"
+            android:textStyle="italic"
+            android:visibility="invisible"
+            tools:text="Last Search : Ali"/>
 
     </RelativeLayout>
 

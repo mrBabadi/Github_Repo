@@ -3,9 +3,12 @@ package com.bbd.github_repo.presentation.viewmodel
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.LiveDataReactiveStreams
+import androidx.lifecycle.MutableLiveData
 import com.bbd.github_repo.data.ResponseState
 import com.bbd.github_repo.data.source.enums.SearchInputAction
 import com.bbd.github_repo.domain.entity.UserSearchEntity
+import com.bbd.github_repo.domain.usecase.GetLastSearchUseCase
+import com.bbd.github_repo.domain.usecase.SaveLastSearchUseCase
 import com.bbd.github_repo.domain.usecase.SearchUserUseCase
 import com.bbd.github_repo.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +19,11 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchUsersViewModel @Inject constructor(private val searchUsersUseCase: SearchUserUseCase) :
+class SearchUsersViewModel @Inject constructor(
+    private val searchUsersUseCase: SearchUserUseCase,
+    private val saveLastSearchUseCase: SaveLastSearchUseCase,
+    private val getLastSearchUseCase: GetLastSearchUseCase
+) :
     BaseViewModel() {
 
     private val TAG = SearchUsersViewModel::class.java.name
@@ -33,8 +40,11 @@ class SearchUsersViewModel @Inject constructor(private val searchUsersUseCase: S
         val switchMap = subject
             .debounce(500, TimeUnit.MILLISECONDS)
             .filter { it.isNotEmpty() }
-            .distinctUntilChanged()
-            .switchMap { t -> searchUsersUseCase(t).toObservable() }
+//            .distinctUntilChanged()
+            .switchMap { t ->
+                saveLastSearch(t)
+                searchUsersUseCase(t).toObservable()
+            }
             .observeOn(AndroidSchedulers.mainThread())
         return LiveDataReactiveStreams.fromPublisher(switchMap.toFlowable(BackpressureStrategy.LATEST))
     }
@@ -48,4 +58,12 @@ class SearchUsersViewModel @Inject constructor(private val searchUsersUseCase: S
     }
 
     fun getLastAction() = lastAction
+
+
+
+    private fun saveLastSearch(input: String) {
+        saveLastSearchUseCase(input)
+    }
+
+    fun getLastSearch() = getLastSearchUseCase()
 }

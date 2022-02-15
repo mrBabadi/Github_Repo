@@ -50,6 +50,7 @@ class SearchUsersFragment : BaseFragment() {
         setupListener()
         observeChanges()
         setupRecyclerView()
+        showLastSearch()
     }
 
     private fun setupListener() {
@@ -116,13 +117,19 @@ class SearchUsersFragment : BaseFragment() {
         viewModel.observeInputChanges().observe(this, {
             when (it) {
                 SearchInputAction.VOICE -> {
+                    showLastSearch()
                     usersAdapter.updateList(arrayListOf())
                     binding.searchInputIv.setImageResource(R.drawable.ic_baseline_keyboard_voice_24)
 
                 }
-                SearchInputAction.CLEAR -> binding.searchInputIv.setImageResource(R.drawable.ic_baseline_close_24)
+                SearchInputAction.CLEAR -> {
+                    hideLastSearch()
+                    binding.searchInputIv.setImageResource(R.drawable.ic_baseline_close_24)
+                }
             }
         })
+
+
     }
 
 
@@ -132,6 +139,19 @@ class SearchUsersFragment : BaseFragment() {
             usersAdapter = UsersAdapter(onItemClick = ::onItemClicked)
             adapter = usersAdapter
         }
+    }
+
+    private fun showLastSearch() {
+        val lastSearch = viewModel.getLastSearch()
+        binding.lastSearchTv.visibility = if (lastSearch.isEmpty()) View.INVISIBLE else View.VISIBLE
+        "Last Search: $lastSearch".also { binding.lastSearchTv.text = it }
+        binding.lastSearchTv.setOnClickListener {
+            binding.searchInputEt.setText(lastSearch)
+        }
+    }
+
+    private fun hideLastSearch() {
+        binding.lastSearchTv.visibility = View.INVISIBLE
     }
 
     private fun onItemClicked(userOverviewEntity: UserOverviewEntity) {
