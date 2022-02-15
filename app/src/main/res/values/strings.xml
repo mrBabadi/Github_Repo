@@ -3,6 +3,16 @@
 
     <string name="search_input_hint">Search in Github users</string>
     <string name="no_users_found">No Users Found</string>
+    <string name="voice_search_hint">Try say something</string>
+    <string name="device_not_supported_speech_to_text">Device is not supporting Speech To Text</string>
+
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    <string name="joined">Joined</string>
+    <string name="lastActivity">Last update</string>
+    <string name="repository">Repository</string>
+    <string name="repositories">Repositories</string>
+    <string name="github_page">Github</string>
 
     <string name="error_403">Too many requests, try a few minutes later</string>
     <string name="error_404">User Not Found</string>
