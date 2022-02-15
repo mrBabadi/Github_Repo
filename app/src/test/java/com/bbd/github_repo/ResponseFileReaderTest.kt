@@ -1,4 +1,4 @@
-package ir.bbd.githubrepo
+package com.bbd.github_repo
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
